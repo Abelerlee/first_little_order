@@ -4,8 +4,8 @@ the road for web
 
 the road for git study
 git安装与环境配置
-    git config --global user.name "tengj"
-    git config --global user.email johndoe@example.com
+    git config --global user.name "mmm"
+    git config --global user.email aaaa@example.com
     --global 选项命令只需要运行一次，之后无论你在该系统上做任何事情， Git 都会使用那些信息。
 
 创建版本库
@@ -40,8 +40,8 @@ git rm命令结论:
 Git连接远程仓库:
     git remote               查看远程库的信息  
     git remote -v            显示更详细的信息  
-    git remote add origin git@git.coding.net:tengj/gitLearn.git  连接远程仓库  
-    git clone git@git.coding.net:tengj/gitLearn.git            复制一份远程仓库项目到本地  
+    git remote add origin git@git.coding.net:aaaa/gitLearn.git  连接远程仓库  
+    git clone git@git.coding.net:aaaa/gitLearn.git            复制一份远程仓库项目到本地  
     git remote rm origin     关闭连接远程仓库  
     git push origin master   推送分支  
     git pull origin master   抓取更新
