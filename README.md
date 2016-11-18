@@ -3,6 +3,7 @@
 the road for web
 
 the road for git study
+git的基本操作与命令
 git安装与环境配置
     git config --global user.name "mmm"
     git config --global user.email aaaa@example.com
@@ -59,3 +60,4 @@ Git分支管理:
     git merge dev        名称为dev的分支与当前分支合并
     git branch -d dev    删除分支dev
 
+es6的学习与认识
