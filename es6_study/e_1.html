@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta name='viewport' content="width=divice-width">
     <title>Title</title>
 </head>
-<body>
-   <script type="text/javascript">
 
-   </script>
+<body>
+    <script type="text/javascript">
+        function Point(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+        Point.prototype.toString = function() {
+            return '(' + this.x + ',' + this.y + ')'
+        }
+        var p = new Point(1, 2);
+        document.write(p);
+
+        class PointClass {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+            toStringClass () {
+                return '('+this.x+','+this.y+')'
+            }
+        }
+    </script>
 </body>
+
 </html>
