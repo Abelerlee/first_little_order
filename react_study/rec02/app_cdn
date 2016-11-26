@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name='viewprot' content='width=device_width'/>
+    <title>Hello React!</title>
+    <!-- 以下引入 react.js, react-dom.js（react 0.14 後將 react-dom 從 react 核心分離，更符合 react 跨平台抽象化的定位）以及 babel-core browser 版 -->
+    <script src="../basejs/react.min.js"></script>
+    <script src="../basejs/react-dom.min.js"></script>
+    <script src="../basejs/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <!--注意此处script的type的变化-->
+    <script type="text/babel"> 
+      ReactDOM.render(
+        <h1>Hello, world!</h1>,
+        document.getElementById('example')
+      );
+    </script>
+  </body>
+</html>
