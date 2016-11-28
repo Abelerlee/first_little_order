@@ -1,0 +1,15 @@
+{
+  "name": "bgb_react",
+  "version": "1.0.0",
+  "description": "用  Browserify、Gulp、Babelify配置环境的开发demo",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^13.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
