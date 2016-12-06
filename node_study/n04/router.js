@@ -1,9 +1,18 @@
+var optfile = require('../module/optfile');
 
 module.exports = {
     login: function(req, res) {
-        res.write('登录页面的模块')
+        function recall(data) {
+            res.write(data);
+            res.end('ooooooooK');
+        }
+        optfile.readfile('../view/view.html', recall);
     },
     regiser: function(req, res) {
-        res.write('注册页面的模块')
+        function recall(data) {
+            res.write(data);
+            res.end('ooooooooK');
+        }
+        optfile.readfile('../view/view1.html', recall);
     }
 }
