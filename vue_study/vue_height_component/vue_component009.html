@@ -251,7 +251,12 @@
             <tbody>
                 <tr v-for="(index,entry) in dataList | filterBy searchKey">
                     <td v-for="col in columns">
-                        {{entry[col.name]}}
+                        <span v-if="col.isKey">
+                            <a href="javascript:void(0)" @click="openEditItemDialog(index,'Edititem'+entry[col.name])">{{entry[col.name]}}</a>
+                        </span>
+                        <span>
+                            {{entry[col.name]}}
+                        </span>
                     </td>
                     <td class="text-center">
                         <button @click="deleteItem(index)">delete</button>
@@ -260,9 +265,9 @@
             </tbody>
         </table>
         <div class="container">
-            <button class="btn" @click="">Creat</button>
+            <button class="btn" @click="openNewItemdialog('Create New Item')">Creat</button>
         </div>
-        <modal-dialog :mode="mode" :item="item" :title="title" :fields="columns" v-on:create-item="createItem">
+        <modal-dialog :mode="mode" :item="item" :title="title" :fields="columns" v-on:create-item="createItem" v-on:updata-item="updataItem">
         </modal-dialog>
     </template>
 
@@ -276,10 +281,10 @@
                     <footer class="dialog-footer">
                         <div v-for="field in fields" class="form-group">
                             <label>{{ field.name }}</label>
-                            <select name="" id="" v-if="field.dataSource" v-model="item[field.name]">
+                            <select name="" id="" v-if="field.dataSource" v-model="item[field.name]" :disabled="mode === 2 && field.isKey">
                                 <option v-for="opt in field.dataSource" :value="opt">{{ opt }}</option>
                             </select>
-                            <input v-else type="text" v-model= "item[field.name]"/>
+                            <input v-else type="text" v-model= "item[field.name]" :disabled="mode === 2 && field.isKey"/>
                         </div>
                         <div class="form-group">
                             <label></label>
@@ -310,7 +315,7 @@
                         template: "#dialog-template",
                         data: function(){
                             return {
-                                show: true
+                                show: false
                             }
                         },
                         props: ["mode","title","item","fields"],
@@ -319,7 +324,17 @@
                                 this.show = false;
                             },
                             save: function(){
-
+                                if(this.mode === 1){
+                                    this.$dispatch('creat-item');
+                                }else if(this.mode === 2){
+                                    // 使用$dispatch调用simple-grid的update-item事件
+                                    this.$dispatch('update-item')
+                                }
+                            }
+                        },
+                        event: {
+                            'showDialog': function(show) {
+                                this.show = show;
                             }
                         }
                     }
@@ -327,6 +342,35 @@
                 },
                 props: ['dataList', 'columns', 'searchKey'],
                 methods: {
+                    initItemForUpdata: function(p){
+                        var c = c|| {};
+                        for(var i in c){
+                            if(p.hasOwnProperty(i)){
+                                if(typeof p[i] === 'object'){
+                                    c[i] = Array.isArray(p[i]?[]:{});
+                                    deepCopy(p[i],c[i]);
+                                }else{
+                                    c[i] = p[i];
+                                }
+                            }
+                        }
+                        return c;
+                    },
+                    findItemByKey: function(key){
+                        var keyColumn = this.keyColumn
+                        for(var i=0;i<this.dataList.length;i++){
+                            if(this.dataList[i][keyColumn] === key){
+                                return this.dataList[i]
+                            }
+                        }
+                    },
+                    itemExists: function(keyColumn) {
+                        for (var i = 0; i < this.dataList.length; i++) {
+                            if (this.item[keyColumn] === this.dataList[i][keyColumn])
+                                return true;
+                        }
+                        return false;
+                    },
                     deleteItem: function(index) {
                         this.dataList.splice(index, 1);
                     },
@@ -337,10 +381,35 @@
                         this.$broadcast('showDialog',true); 
                     },
                     createItem: function(){
-                        //将创建的item添加到dataList中
-                        this.dataList.push(this.item);
-                        this.$broadcast('showDialog',false);
-                        this.item= {};
+                       var keyColumn = this.getKeyColumn()
+                        if (!this.itemExists(keyColumn)) {
+                            // 将item追加到dataList
+                            this.dataList.push(this.item)
+                            // 广播事件，传入参数false表示隐藏对话框
+                            this.$broadcast('showDialog', false)
+                            // 新建完数据后，重置item对象
+                            this.item = {}
+                        } else {
+                            alert(keyColumn + ' "' + this.item[keyColumn] + '" is already exists')
+                        }
+                    },
+                    updateItem: function() {
+                        // 获取主键列
+                        var keyColumn = this.keyColumn
+
+                        for (var i = 0; i < this.dataList.length; i++) {
+                            // 根据主键查找要修改的数据，然后将this.item数据更新到this.dataList[i]
+                            if (this.dataList[i][keyColumn] === this.item[keyColumn]) {
+                                for (var j in this.item) {
+                                    this.dataList[i][j] = this.item[j]
+                                }
+                                break;
+                            }
+                        }
+                        // 广播事件，传入参数false表示隐藏对话框
+                        this.$broadcast('showDialog', false)
+                        // 修改完数据后，重置item对象
+                        this.item = {}
                     },
                 }
         })
