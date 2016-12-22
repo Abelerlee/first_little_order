@@ -1,47 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Document</title>
-    <style>
+    <head>
+        <meta charset="utf-8">
+        <title>不同类型的弹窗</title>
+        <link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
+        <style>
             * {
                 font-family: simhei, Helvetica, Arial, sans-serif;
             }
+
             #dialog-template{
                 display: none;
-            }           
-            .btn {
+            }       
+            
+            button {
                 display: inline-block;
                 border: 0;
                 box-sizing: border-box;
-                background: #cb4a70;
                 color: #fff;
-                font-size: 1.5em;
+                font-size: 1em;
                 border-radius: .1em;
                 line-height: 2em;
                 padding: 0 1em;
                 transition: .4s ease-out;
-                border: 1px solid #cb4a70;
                 outline: 0;
                 text-decoration: none;
             }
             
-            .btn:hover,
-            .btn:focus {
-                background: #fff;
-                color: #cb4a70;
+            button:hover,
+            button:focus {
+                opacity: 0.5;
                 cursor: pointer;
                 transition: .15s ease-in;
             }
             
-            .btn-open {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                -webkit-transform: translate(-50%, -50%);
-                -ms-transform: translate(-50%, -50%);
-                -o-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
+            .btn-group{
+                margin: 200px auto;
+                width: 640px;
+            }
+            
+            .btn-info{
+                background: #0090d3;
+            }
+            
+            .btn-success{
+                background: #00cc66;
+            }
+            
+            .btn-warning{
+                background: #f0ad4e;
+            }
+            
+            .btn-error{
+                background: #d9534f;
             }
             
             .dialog {
@@ -83,7 +94,6 @@
             }
             
             .dialog-header {
-                background: #cb4a70;
                 color: #fff;
             }
             
@@ -118,6 +128,22 @@
                 opacity: 0;
                 background: rgba(0, 0, 0, 0.5);
                 transition: all .6s;
+            }
+            
+            .dialog-info .dialog-header,.dialog-info button {
+                background-color: #0090d3;
+            }
+            
+            .dialog-success .dialog-header,.dialog-success button {
+                background-color: #00cc66;
+            }
+            
+            .dialog-warning .dialog-header,.dialog-warning button {
+                background-color: #f0ad4e;
+            }
+            
+            .dialog-error .dialog-header,.dialog-error button {
+                background-color: #d9534f;
             }
             
             .close {
@@ -162,72 +188,72 @@
                 -webkit-transition: -webkit-transform 1.0s ease all;
             }
         </style>
-        <link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
-</head>
-<body>
-<div id="app">
-    <modal-dialog v-bind:show.sync="show">
-
-        <header class="dialog-header" slot="header">
-            <h1 class="dialog-title">提示信息</h1>
-        </header>
-
-        <div class="dialog-body" slot="body">
-            <p>你想在对话框中放什么内容都可以！</p>
-            <p>你可以放一段文字，也可以放一些表单，或者是一些图片。</p>
-        </div>
-
-        <footer class="dialog-footer" slot="footer">
-            <button class="btn" @click="closeDialog">关闭</button>
-        </footer>
-    </modal-dialog>
-
-    <button class="btn btn-open" @click="openDialog">打开对话框</button>
-</div>
-<template id="dialog-template">
-    <div class="dialogs">
-        <div class="dialog" v-bind:class="{ 'dialog-active': show }">
-            <div class="dialog-content">
-                <div class="close rotate">
-                    <span class="iconfont icon-close" @click="close"></span>
-                </div>
-                <slot name="header"></slot>
-                <slot name="body"></slot>
-                <slot name="footer">
-                    <button class="btn" @click="close">关闭</button>
-                </slot>
+    </head>
+    <body>
+        <div id="app">
+            <div class="btn-group">
+                <button class="btn-info" @click="dialogOpen('dialog-info')">信息</button>
+                <button class="btn-success" @click="dialogOpen('dialog-success')">成功</button>
+                <button class="btn-warning" @click="dialogOpen('dialog-wraning')">警告</button>
+                <button class="btn-error" @click="dialogOpen('dialog-error')">错误</button>
             </div>
+            <model-dialog v-bind:show.sync="show" v-bind:class="dialogClass" >
+                <header class="dialog-header" slot="header">
+                    <h1>提示消息</h1>
+                </header>
+                <div class="dialog-body" slot="body">
+                    <p>来呀！一起玩</p>
+                </div>
+                <footer class="dialog-footer" slot="footer">
+                    <button @click = "dialogColse">关闭</button>
+                </footer>
+            </model-dialog>
         </div>
-        <div class="dialog-overlay"></div>
-    </div>
-</template>
 
-<script src="../vue_js/vue.js"></script>
-<script>
-    Vue.component('modal-dialog', {
-        template: '#dialog-template',
-        props: ['show'],
-        methods: {
-            close: function() {
-                this.show = false
-            }
-        }
-    })
+        <template id="dialog-template">
+            <div class="dialogs">
+                <div class="dialog" v-bind:class="{'dialog-active': show}">
+                    <div class="dialog dialog-content">
+                        <div class="close rotate">
+                            <span class="iconfont icon-close" @click="dialogColse"></span>
+                        </div>
+                        <slot name="header"></slot>
+                        <slot name="body"></slot>
+                        <slot name="footer"></slot>
+                    </div>
+                </div>
+                <div class="dialog-overlay"></div>
+            </div>
+        </template>
 
-    new Vue({
-        el: '#app',
-        data: {
-            show: false
-        },
-        methods: {
-            openDialog: function() {
-                this.show = true
-            },
-            closeDialog: function() {
-                this.show = false
-            }
-        }
-    })
-</script>    
-</body>
+        <script type="text/javascript" src="../vue_js/vue.js"></script>
+        <script type="text/javascript">
+            Vue.component("model-dialog",{
+                template: "#dialog-template",
+                props: ["show"],
+                methods: {
+                    close: function() {
+                        this.show = false;
+                    }
+                }
+            })
+
+            new Vue({
+                el: "#app",
+                data: {
+                    show: false,
+                    dialogClass: "dialog-info"
+                },
+                methods: {
+                    dialogColse: function() {
+                        this.show = false
+                    },
+                    dialogOpen: function(dialogClass) {
+                        this.show = true;
+                        this.dialogClass = dialogClass;
+                    }
+                }
+            })
+        </script>
+    </body>
 </html>
