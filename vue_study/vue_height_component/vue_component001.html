@@ -5,7 +5,7 @@
     </head>
     <body>
     <div id="app">
-        <my-component>
+        <my-component v-show= "display">
         </my-component>
     </div>
 
@@ -19,12 +19,16 @@
     <script>
         new Vue({
             el: '#app',
+            data: {
+                display: false  //起作用，作用域的问题
+            },
             components: {
                 'my-component': {
                     template: '#myComponent',
                     data: function() {
                         return {
-                            msg: 'This is a component!'
+                            msg: 'This is a component!',
+                            display: false //无作用，作用域的问题
                         }
                     },
                     methods: {
