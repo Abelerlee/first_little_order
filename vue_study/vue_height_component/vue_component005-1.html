@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>父子组件之间的通信</title>
+    </head>
+    <body>
+        <div id="app">
+            <p-component>
+
+            </p-component>
+        </div>
+
+        <template id="pComponent">
+            <child-component1 v-ref:cc1></child-component1>
+            <child-component2 v-ref:cc2></child-component2>
+            <button @click="clickEvent">Alert</button>
+        </template>
+
+        <template id="childComponent1">
+            <h3>{{ mes }}</h3>
+        </template>
+
+        <template id="childComponent2">
+            <h3>{{ mes }}</h3>
+        </template>
+
+        <script type="text/javascript" src="../vue_js/vue.js"></script>
+
+        <script type="text/javascript">
+            Vue.component("p-component",{
+                template: "#pComponent",
+                components: {
+                    "child-component1": {
+                        template: "#childComponent1" ,
+                        data: function() {
+                            return {mes : "child-component1"}
+                        }
+                    },
+                    "child-component2": {
+                        template: "#childComponent2",
+                        data: function() {
+                            return {mes : "child-component2"}
+                        }
+                    }
+                },
+                methods: {
+                    clickEvent: function() {
+                        alert(this.$refs.cc1.mes);
+                        alert(this.$refs.cc2.mes);
+                    }
+                }
+            })
+
+            new Vue({
+                el: "#app"
+            })
+        </script>
+    </body>
+</html>
