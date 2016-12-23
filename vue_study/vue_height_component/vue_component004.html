@@ -194,10 +194,11 @@
             <div class="btn-group">
                 <button class="btn-info" @click="dialogOpen('dialog-info')">信息</button>
                 <button class="btn-success" @click="dialogOpen('dialog-success')">成功</button>
-                <button class="btn-warning" @click="dialogOpen('dialog-wraning')">警告</button>
+                <button class="btn-warning" @click="dialogOpen('dialog-warning')">警告</button>
                 <button class="btn-error" @click="dialogOpen('dialog-error')">错误</button>
             </div>
-            <model-dialog v-bind:show.sync="show" v-bind:class="dialogClass" >
+
+            <model-dialog v-bind:show.sync="show" v-bind:class="dialogClass">
                 <header class="dialog-header" slot="header">
                     <h1>提示消息</h1>
                 </header>
@@ -213,7 +214,7 @@
         <template id="dialog-template">
             <div class="dialogs">
                 <div class="dialog" v-bind:class="{'dialog-active': show}">
-                    <div class="dialog dialog-content">
+                    <div class="dialog-content">
                         <div class="close rotate">
                             <span class="iconfont icon-close" @click="dialogColse"></span>
                         </div>
@@ -249,8 +250,8 @@
                         this.show = false
                     },
                     dialogOpen: function(dialogClass) {
-                        this.show = true;
-                        this.dialogClass = dialogClass;
+                        this.show = true
+                        this.dialogClass = dialogClass
                     }
                 }
             })
