@@ -4,7 +4,7 @@ var router = require('../n04/router');
 
 http.createServer(function(request, response) {
     response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    if (request.url !== '/favicon.ico') {
+    if (reZX C`quest.url !== '/favicon.ico') {
         //optfile.readfileSync('../view/view.html');
         var pathname = url.parse(request.url).pathname;
         console.log(pathname);
