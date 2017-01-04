@@ -1,0 +1,23 @@
+        var zNodes =[
+            { "id":1, "pId":0, "name":"电"," open":true,"childOuter":false,"drag":false},
+                { "id":11, "pId":1, "name":"景观用电", "open":true, "childOuter":false},
+                    { "id":111, "pId":11, "name":"can drag 1-1-1", "dropRoot":false},
+                    { "id":112, "pId":11, "name":"can drag 1-1-2", "dropRoot":false},
+                    { "id":113, "pId":11, "name":"can drag 1-1-3", "dropRoot":false},
+                    { "id":114, "pId":11, "name":"can drag 1-1-4", "dropRoot":false},
+                    { "id":115, "pId":11, "name":"can drag 1-1-5", "dropRoot":false},
+                    { "id":116, "pId":11, "name":"can drag 1-1-6", "dropRoot":false},
+                    { "id":117, "pId":11, "name":"can drag 1-1-7", "dropRoot":false},
+                    { "id":118, "pId":11, "name":"can drag 1-1-8", "dropRoot":false},
+                    { "id":119, "pId":11, "name":"can drag 1-1-9", "dropRoot":false},
+                { "id":12, "pId":1, "name":"水景用电", "open":true, "childOuter":false},
+                    { "id":121, "pId":12, "name":"can drag 1-2-1","dropInner":false},
+                    { "id":122, "pId":12, "name":"can drag 1-2-2","dropRoot":false},
+                    { "id":123, "pId":12, "name":"can drag 1-2-3","dropRoot":false},
+                    { "id":124, "pId":12, "name":"can drag 1-2-4","dropRoot":false},
+                    { "id":125, "pId":12, "name":"can drag 1-2-5","dropRoot":false},
+                    { "id":126, "pId":12, "name":"can drag 1-2-6","dropRoot":false},
+                    { "id":127, "pId":12, "name":"can drag 1-2-7","dropRoot":false},
+                    { "id":128, "pId":12, "name":"can drag 1-2-8","dropRoot":false},
+                    { "id":129, "pId":12, "name":"can drag 1-2-9","dropRoot":false}
+        ]
