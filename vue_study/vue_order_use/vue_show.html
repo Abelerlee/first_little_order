@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Vue常用的指令的使用</title>
+    </head>
+    <body>
+        <div id="app_if">
+            <h1>Hello VueJs_if</h1>
+            <h1 v-show="yes">Yes</h1>
+            <h1 v-show="no">No</h1>
+            <h1 v-show="age >=25">Age :{{ age }}</h1>
+            <h1 v-show="name.indexOf('jack')>=0">Name: {{ name }}</h1>
+        </div>
+        <script type="text/javascript" src= "../vue_js/vue.js"></script>
+        <script type="text/javascript">
+            var vm = new Vue({
+                el: "#app_if",
+                data: {
+                    yes: true,
+                    no: true,
+                    age: 25,
+                    name: "jackkeepfloor"
+                }
+            });
+        </script>
+    </body>
+</html>
