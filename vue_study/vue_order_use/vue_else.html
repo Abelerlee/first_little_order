@@ -24,13 +24,48 @@
                 sex: "male"
             }
         })
-        function ajax() {
-            if(XMLHttpRequest){
-                 var http = new XMLHttpRequest();
+        function xmlHttpRequest() {
+            var http = null;
+            if(window.XMLHttpRequest){
+                http = new XMLHttpRequest();
              }else{
-                 var http = new ActiveXObject("Msxml2.XMLHTTP");
+                http = new ActiveXObject("Microsoft.XMLHTTP");
              }
-           
+           return http;
+        }
+
+        function ajaxGet() {
+            var req= xmlHttpRequest();
+            if(res){
+                req.open("get", "url" ,true);
+                req.onreadystatechange= function() {
+                    if(req.readyState == 4){
+                        if(req.status == 200){
+                            alert("success");
+                        }else{
+                            alert("error");
+                        }
+                    }
+                }
+            }
+            req.send(null);
+        }
+        function ajaxPost() {
+            var req= xmlHttpRequest();
+            if(req) {
+                req.open("post" , "url" , true);
+                req.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=gbk;");   
+                req.send();
+                req.onreadystatechange= function() {
+                    if(req.readyState == 4){
+                        if(req.status == 200){
+                            alert("success");
+                        }else{
+                            alert("error");
+                        }
+                    }
+                }
+            }
         }
         
         </script>
