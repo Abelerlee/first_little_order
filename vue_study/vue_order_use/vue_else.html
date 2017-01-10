@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv= "Content-Type" content= "text/html; charset=utf-8" />
+        <meta http-equiv= "X-UA-Compatible" content= "IE=edge"/>
+        <meta name= "viewport" content= "width=device-width maximum-scale= 1.0 minimum= 1.0 inital= 1.0 user-scalable= no"  />
+    </head>
+    <body>
+        <div id="app">
+            <h1 v-if= "age>=25">Age: {{ age }}</h1>
+            <h1 v-else>Name: {{ name }}</h1>
+            <h1>-------------------- 对比线 ------------------</h1>
+            <h1 v-show= "name.indexOf('jack')>=0">Name: {{ name }}</h1>
+            <h1 v-else>Sex: {{ sex }}</h1>
+        </div>
+        <script type="text/javascript" src= "../vue_js/vue.js"></script>
+        <script type="text/javascript">
+        var vm = new Vue({
+            el: "#app",
+            data:{
+                age: 28,
+                name: "lili",
+                sex: "male"
+            }
+        })
+        function ajax() {
+            if(XMLHttpRequest){
+                 var http = new XMLHttpRequest();
+             }else{
+                 var http = new ActiveXObject("Msxml2.XMLHTTP");
+             }
+           
+        }
+        
+        </script>
+    </body>
+
+</html>
