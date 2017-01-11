@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Contenet-Type" content="text/html charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" conyent="IE=edge" />
+        <meta name="viewport" content="width=device-width inital=1.0 minimum=1.0 maximum=1.0 user-scalable=no" />
+        <style type="text/css">
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            img{
+                border:0;
+            }
+            ol, ul ,li{list-style: none;} 
+            ul{
+                margin: 100px 50px;
+            }
+            li{
+                
+                border: 1px solid #000;
+                border-left: none;
+                text-align: center;
+                line-height: 30px;
+                float: left;
+            }
+            li:first-nth{
+                border-left: 1px solid #000;
+            }
+            a{
+                display: block;
+                width: 30px;
+                height: 30px;
+                text-decoration: none;
+            }
+            .active{
+                background: #42b983;
+                color:#fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <ul class="pagination">
+                <li v-for="n in pageCount">
+                    <a href="javascript:void(0)" v-bind:class="activeNumber === n+1 ?'active':'' " >    {{ n+1 }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="../vue_js/vue.js"></script>
+        <script type="text/javascript">
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    activeNumber: 1,
+                    pageCount: 10
+                }
+            })
+        </script>
+    </body>
+</html>

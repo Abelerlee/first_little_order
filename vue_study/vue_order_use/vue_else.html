@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
         <meta http-equiv= "Content-Type" content= "text/html; charset=utf-8" />
         <meta http-equiv= "X-UA-Compatible" content= "IE=edge"/>
         <meta name= "viewport" content= "width=device-width maximum-scale= 1.0 minimum= 1.0 inital= 1.0 user-scalable= no"  />
@@ -19,9 +18,9 @@
         var vm = new Vue({
             el: "#app",
             data:{
-                age: 28,
-                name: "lili",
-                sex: "male"
+                age: pid,
+                name: name,
+                sex: sex
             }
         })
 
@@ -109,34 +108,9 @@
             };
         };
 
-
-        /*j++
-        var json=JSON.stringify({"page":j,"pageRows":9});*/
         var data="CODE=125";
-        // j++;
-        ajax("http://www.setfarm.com/index.php/Api/Api?"+data,
-        function(data){
-                         //console.log(data);
-                         var oData=JSON.parse(data);
-                         console.log(oData);
-                         var arr=oData.data.dataInfo;
-                         console.log(arr)
-            /*for(var i=0;i<arr.length;i++){
-                
-               var oLi=document.createElement("li");
-               oLi.className="item";
-               oLi.innerHTML='<img src="'+arr[i].format_image+'"/>'+
-                              '<div class="wrap">'+
-                              '<a href="#" class="explain">'+arr[i].name+
-                              '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>月销量:'+
-                              arr[i].sell_amount+'</span></a>'+
-                              '<a href="#" class="money">'+arr[i].format_market_price+'</a></div>'
-                     oList.appendChild(oLi);
-            }*/
-
-        },function(){
-            alert("失败")
-        })
+        var pid,name,sex;
+        
         
         </script>
     </body>

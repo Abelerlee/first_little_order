@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>vue-for用法</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width inital=1.0 minimum=1.0 maximum=1.0 user-scalable= no" />
+        <style type="text/css">
+            table, td, th {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+            tr{
+                height: 36px;
+            }
+            th,td{
+                width: 200px;
+                text-align: center;
+                border: 1px solid #000;
+            }
+            th{
+                background:#42b983;
+            }
+            tr:nth-of-type(even){
+                background: #eee;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Sex</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="person in people">
+                        <td>{{ person.name }}</td>
+                        <td>{{ person.age }}</td>
+                        <td>{{ person.sex }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script type="text/javascript" src="../vue_js/vue.js"></script>
+        <script type="text/javascript">
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    people:[
+                        {
+                            name: "json",
+                            age: 19,
+                            sex: "male"
+                        },
+                        {
+                            name: "kaa",
+                            age: 30,
+                            sex: "male"
+                        },
+                        {
+                            name: "guangguang",
+                            age: 21,
+                            sex: "nu"
+                        },
+                        {
+                            name: "jack",
+                            age: 19,
+                            sex: "male"
+                        }
+                    ]
+                }
+            })
+        </script>
+    </body>
+</html>
