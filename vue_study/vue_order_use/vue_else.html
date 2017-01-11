@@ -24,7 +24,9 @@
                 sex: "male"
             }
         })
-        function xmlHttpRequest() {
+
+
+        /*function xmlHttpRequest() {
             var http = null;
             if(window.XMLHttpRequest){
                 http = new XMLHttpRequest();
@@ -34,14 +36,16 @@
            return http;
         }
 
-        function ajaxGet() {
+        ajaxGet();
+        function ajaxGet(get, url, data) {
             var req= xmlHttpRequest();
-            if(res){
-                req.open("get", "url" ,true);
+            if(req){
+                req.open("get", "http://www.setfarm.com/index.php/Api/Api?CODE=125" ,true);
                 req.onreadystatechange= function() {
                     if(req.readyState == 4){
                         if(req.status == 200){
                             alert("success");
+                            console.log("======================"+data);
                         }else{
                             alert("error");
                         }
@@ -66,7 +70,73 @@
                     }
                 }
             }
-        }
+        }*/
+
+        function ajax(url, fnSucc, fnFaild){
+            //1.创建Ajax对象
+            var oAjax=null;
+            
+            if(window.XMLHttpRequest)
+            {
+                oAjax=new XMLHttpRequest();
+            }
+            else
+            {
+                oAjax=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            
+            //2.连接服务器
+            oAjax.open('GET', url, true);
+            
+            //3.发送请求
+            oAjax.send();
+            
+            //4.接收服务器的返回
+            oAjax.onreadystatechange=function ()
+            {
+                if(oAjax.readyState==4) //完成
+                {
+                    if(oAjax.status==200)   //成功
+                    
+                        fnSucc(oAjax.responseText);
+                    
+                    else
+                    {
+                        if(fnFaild)
+                            fnFaild(oAjax.status);
+                    }
+                }
+            };
+        };
+
+
+        /*j++
+        var json=JSON.stringify({"page":j,"pageRows":9});*/
+        var data="CODE=125";
+        // j++;
+        ajax("http://www.setfarm.com/index.php/Api/Api?"+data,
+        function(data){
+                         //console.log(data);
+                         var oData=JSON.parse(data);
+                         console.log(oData);
+                         var arr=oData.data.dataInfo;
+                         console.log(arr)
+            /*for(var i=0;i<arr.length;i++){
+                
+               var oLi=document.createElement("li");
+               oLi.className="item";
+               oLi.innerHTML='<img src="'+arr[i].format_image+'"/>'+
+                              '<div class="wrap">'+
+                              '<a href="#" class="explain">'+arr[i].name+
+                              '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>月销量:'+
+                              arr[i].sell_amount+'</span></a>'+
+                              '<a href="#" class="money">'+arr[i].format_market_price+'</a></div>'
+                     oList.appendChild(oLi);
+            }*/
+
+        },function(){
+            alert("失败")
+        })
         
         </script>
     </body>
