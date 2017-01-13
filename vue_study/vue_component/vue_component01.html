@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>component全局注册和局部注册</title>
+</head>
+<body>
+    <div id="app">
+        <component01></component01>
+    </div>
+    <div id="app1">
+        <component011></component011>
+    </div>
+    <script type="text/javascript" src="../vue_js/vue.js"></script>
+    <script type="text/javascript">
+        var Component = Vue.extend({
+            template: '<p>first vue component</p>'
+        });
+
+        var Component1 = Vue.extend({
+            template: '<p>first vue component11111111111111111111111</p>'
+        });
+
+        Vue.component('component01',Component);
+
+        new Vue({
+            el: '#app'
+        })
+         new Vue({
+            el: '#app1',
+            components: {
+                'component011': Component1
+            }
+        })
+    </script>
+</body>
+</html>

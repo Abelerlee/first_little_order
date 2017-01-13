@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Contenet-Type" content="text/html charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width inital=1.0 minimum=1.0 maximum=1.0 user-scalabel=no" />
+    <title>VUE demo</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            border:0;
+        }
+        ol, ul ,li{list-style: none;} 
+    </style>
+    <link rel="stylesheet" type="text/css" href="../css/demo.css" />
+</head>
+<body>
+    <div id="app">
+        <fieldset>
+            <legend>
+                Greate New Person
+            </legend>
+            <div class="form_group">
+                <label>Name:</label>
+                <input type="text" v-model="newPerson.name"/>
+            </div>
+            <div class="form_group">
+                <label>Age:</label>
+                <input type="text" v-model="newPerson.age"/>
+            </div>
+            <div class="form_group">
+                    <label>Sex:</label>
+                    <select v-model="newPerson.sex">
+                    <option value="Male" selected>Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <!-- <div class="form_group">
+                <label>Sex:</label>
+                <sclect v-model="newPerson.sex">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </sclect>
+            </div> -->
+            <div class="form_group">
+                <label></label>
+                <button @click = "createPerson" >Greate</button>
+            </div>
+        </fieldset>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Sex</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="person in people">
+                    <td>{{ person.name }}</td>
+                    <td>{{ person.age }}</td>
+                    <td>{{ person.sex }}</td>  
+                    <td :click = "'taxt_center'">
+                        <button @click = "deletePerson($index)">Delete</button>
+                    </td>             
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript" src= "../vue_js/vue.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                newPerson: {
+                    name: " ",
+                    age: 0,
+                    sex: " "
+                },
+                people: [
+                    {
+                        name: "gaga",
+                        age: 12,
+                        sex: "female"
+                    },
+                    {
+                        name: "didi",
+                        age: 18,
+                        sex: "male"
+                    },
+                    {
+                        name: "yingying",
+                        age: 30,
+                        sex: "female"
+                    },
+                    {
+                        name: 'Chris',
+                        age: 36,
+                        sex: 'Male'
+                    }
+                ]
+            },
+            methods: {
+                createPerson: function() {
+                    this.people.push(this.newPerson);
+                    this.newPerson = {name: "",age: 0, sex: ""};
+                },
+                deletePerson: function(index) {
+                    this.people.splice(index,1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

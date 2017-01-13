@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Contenet-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" conyent="IE=edge" />
+        <meta name="viewport" content="width=device-width, inital=1.0, minimum=1.0, maximum=1.0, user-scalable=no" />
+    </head>
+    <body>
+        <div id="app">
+            <p><input type="text" v-model="message" /></p>
+            <p>
+                <button v-on:click="greet">Greet</button> 
+            </p>
+            <p>
+                <button v-on:click="say('hi')">Hi</button> 
+            </p>
+        </div>
+        <script type="text/javascript" src="../vue_js/vue.js"></script>
+        <script type="text/javascript">
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    message: "hello"
+                },
+                methods: {
+                    greet: function() {
+                        alert(this.message);
+                    },
+                    say: function(mes) {
+                        alert(mes);
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

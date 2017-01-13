@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>component的创建注册</title>
+</head>
+<body>
+    <div id="app">
+        <component01></component01>
+    </div>
+    <script type="text/javascript" src="../vue_js/vue.js"></script>
+    <script type="text/javascript">
+        var Component = Vue.extend({
+            template: '<p>first vue component</p>'
+        });
+
+        Vue.component('component01',Component);
+
+        new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>
