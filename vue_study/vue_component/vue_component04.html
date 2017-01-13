@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>script和template标签的使用</title>
+    </head>
+    <body>
+        <div id="app">
+            <de_component></de_component>
+        </div>
+        <!-- <script type="text/x-template" id="myComponent">
+            <div>
+                javascript 中的 html 
+            </div>
+        </script> -->
+
+        <template id="myComponent">
+            <div>
+                template 中的 html 
+            </div>
+        </template>
+
+        <script type="text/javascript" src="../vue_js/vue.js"></script>
+        <script type="text/javascript">
+
+            Vue.component(  "de_component" , 
+                            {template: "#myComponent"}
+            )
+
+            new Vue({
+                el: "#app"
+            })
+        </script>
+    </body>
+</html>

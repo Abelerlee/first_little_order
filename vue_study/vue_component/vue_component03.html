@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>组件注册的语法糖</title>
+    </head>
+    <body>
+        <div id="app">
+            <ao_component></ao_component>
+        </div>
+        <div id="app1">
+            <bo_component></bo_component>
+        </div>
+        <script type="text/javascript" src="../vue_js/vue.js"></script>
+        <script type="text/javascript">
+            Vue.component(
+                "ao_component", 
+                {
+                     template: "<p>全局语法糖的应用</p>"
+                }
+            )
+
+            var vm = new Vue({
+                el: "#app"
+            })
+            var vm1 = new Vue({
+                el: "#app1",
+                components: {
+                    "bo_component": {
+                         template: "<p>局部语法糖的应用</p>"
+                    }
+                }
+            })
+
+
+
+
+        </script>
+    </body>
+</html>

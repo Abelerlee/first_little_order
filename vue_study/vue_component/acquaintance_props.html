@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>初识props</title>
+        <link rel="stylesheet" type="text/css" href="../css/demo.css" />
+    </head>
+    <body>
+        <div id="app">
+            <pro_component v-bind:my-name="name" v-bind:my-age="age" v-bind:my-sex="sex"> </pro_component>
+        </div>
+        <template id="proComponent">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Sex</th>
+                </tr>
+                <tr>
+                    <td>{{ myName }}</td>
+                    <td>{{ myAge }}</td>
+                    <td>{{ mySex }}</td>
+                </tr>
+            </table>
+        </template>
+
+        <script type="text/javascript" src="../vue_js/vue.js"></script>
+        <script type="text/javascript">
+            /*
+            错误的写法
+
+             */Vue.component(
+                "pro_component",
+                {
+                    template: "#proComponent"
+                    
+                },{
+                    props：["myName" , "myAge" , "mySex"]
+                }
+                
+            )*/
+
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    name: "leilei",
+                    age: 20,
+                    sex: "male"
+                },
+                components: {
+                    "pro_component":
+                    {
+                        template: "#proComponent",
+                        props: ["myName" , "myAge" , "mySex"]
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

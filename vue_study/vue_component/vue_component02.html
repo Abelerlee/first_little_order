@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>component父子组件</title>
+    </head>
+    <body>
+        <div id="app">
+            <parent_component></parent_component>
+        </div>
+        <script type="text/javascript" src="../vue_js/vue.js"></script>
+        <script type="text/javascript">
+            var childCompnent = Vue.extend({
+                    template: "<p>子级组件</p>"
+            });
+
+            var parComponent = Vue.extend({
+                template: "<p>父级组件</p><childer_component></childer_component>",
+                components: {
+                    "childer_component" : childCompnent
+                }
+            });
+
+            var ve = new Vue({
+                el: "#app",
+                components: {
+                    "parent_component" : parComponent
+                }
+            })
+        </script>
+    </body>
+</html>
