@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+    <p>Messages: {{ messages | json }}</p>
+    <child-component></child-component>
+</div>
+
+<template id="child-component">
+    <input v-model="msg" />
+    <button v-on:click="notify">Dispatch Event</button>
+</template>
+
+<script src="../vue_js/vue.js"></script>
+<script>
+    // 注册子组件
+    Vue.component('child-component', {
+        template: '#child-component',
+        data: function() {
+            return {
+                msg: ''
+            }
+        },
+        methods: {
+            notify: function() {
+                if (this.msg.trim()) {
+                    this.$dispatch('child-msg', this.msg)
+                    this.msg = ''
+                }
+            }
+        }
+    })
+
+    // 初始化父组件
+    new Vue({
+        el: '#app',
+        data: {
+            messages: []
+        },
+        events: {
+            'child-msg': function(msg) {
+                this.messages.push(msg)
+            }
+        }
+    })
+</script>
+</body>
+</html>
